@@ -30,7 +30,7 @@ class EOS extends Controller
           //$this->Compare($last);
           $this->redis->lPush('eos',json_encode($last));
         }
-        sleep(1);
+        //sleep(1);
       }while(false);
     }
 

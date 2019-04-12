@@ -11,10 +11,6 @@ class CompareEOS extends Controller
     {
         //$sql = 'select max(`time`) as `time`,`price` from `eos`';
         //$last = $this->db->QueryOne($sql);
-        $msg='xxx';
-
-        $this->func->log_file($msg,false);
-        die;
         set_time_limit(0);
         do{
             $last = json_decode($this->redis->lPop('eos'),true);
@@ -46,7 +42,7 @@ class CompareEOS extends Controller
 
 
             if($ratio>=1.5){
-                $this->func->log_file($msg,true);
+                $this->func->log_file($msg);
                 $this->func->wechatMSG($msg);
                 $this->func->phoneMSG();
             }
