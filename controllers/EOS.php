@@ -18,18 +18,20 @@ class EOS extends Controller
         $data = $this->func->request_get($url);
         $data = json_decode($data,true);
         //判断获取是否错误
-        if(!array_key_exists('error_code',$data)){
-          $time = $data['date'];
-          $price = $data['ticker']['last'];
+        if(is_array($data)){
+          if(!array_key_exists('error_code',$data)){
+            $time = $data['date'];
+            $price = $data['ticker']['last'];
 
-          $sql = "insert into `eos`(`time`,`price`) values($time,$price)";
+            $sql = "insert into `eos`(`time`,`price`) values($time,$price)";
 
-          $result = $this->db->Execute($sql);
+            $result = $this->db->Execute($sql);
 
-          $last = ['time'=>$time, 'price'=>$price];
-          //$this->Compare($last);
-          $this->redis->lPush('eos',json_encode($last));
-        }
+            $last = ['time'=>$time, 'price'=>$price];
+            //$this->Compare($last);
+            $this->redis->lPush('eos',json_encode($last));
+          }
+        }        
         sleep(1);
       }while(true);
     }
