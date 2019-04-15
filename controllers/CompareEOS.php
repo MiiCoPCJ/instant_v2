@@ -48,18 +48,15 @@ class CompareEOS extends Controller
 
 
             if($ratio>=1.5){
-                //提醒3次，每次隔1分钟
-                if($noticePoint<3){
-                  if(($time-60)>$noticeTime){
-                    $noticeTime = $time;
-                    $noticePoint++;
-                    $this->func->log_file($msg);
-                    $this->func->wechatMSG($msg);
-                    $this->func->phoneMSG();
-                  }
-                }else{
-                  break;
+                //每次隔1分钟
+                if(($time-60)>$noticeTime){
+                  $noticeTime = $time;
+                  $noticePoint++;
+                  $this->func->log_file($msg,false,'notice_15.log');
+                  $this->func->wechatMSG($msg);
+                  $this->func->phoneMSG();
                 }
+
 
             }
 
