@@ -16,7 +16,7 @@ class CleanData extends Controller
       $sql = "delete from `eos` where time<".($time-3600);
       $result = $this->db->Execute($sql);
       $msg = "time: ".date('Y-m-d H:i:s',$time).' '.$sql;
-      $this->func->log_file($msg,true,'delete_data.log');
+      $this->func->log_file($msg,false,'delete_data.log');
     }
 
 
