@@ -30,7 +30,7 @@ class CompareEOS extends Controller
             $pre = $this->db->QueryOne('select `time`,`price` from `eos` where `time` = '.$preTime);
             //不存在具体时间戳数据处理
             if(empty($pre)){
-                $pre = $this->db->QueryOne('select `time`,`price` from `eos` where `time` <= '.$preTime.' order by time DESC limie 1');
+                $pre = $this->db->QueryOne('select `time`,`price` from `eos` where `time` <= '.$preTime.' order by time DESC limit 1');
             }
 
             if(empty($pre)){
