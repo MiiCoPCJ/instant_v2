@@ -40,6 +40,12 @@ class CompareEOS extends Controller
             if(empty($comparePrice)){
               continue;
             }
+
+            //防止过久数据
+            if($pre['time']<($time-250)){
+              continue;
+            }
+
             $ratio = round(($price-$comparePrice)/$price*100,8);
 
             //提醒
